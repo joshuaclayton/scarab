@@ -3,15 +3,25 @@ require "active_support/core_ext/array/grouping"
 module Scarab
   class Cli
     def initialize(*args)
-      list = WordList.new(args.first).to_a
-      longest = list.sort_by(&:length).reverse.first.length
+      @word_list ||= WordList.new(args.first)
 
-      terminal_width = Integer(`tput cols`.strip)
-      columns = terminal_width/(longest + 4)
-
-      list.in_groups_of(columns).each do |row|
-        puts row.map {|word| sprintf("%-#{longest + 4}s", word) }.join
+      @word_list.to_a.in_groups_of(column_count).each do |row|
+        puts row.map {|word| sprintf("%-#{column_width}s", word) }.join
       end
+    end
+
+    private
+
+    def terminal_width
+      Integer(`tput cols`.strip)
+    end
+
+    def column_count
+      terminal_width/column_width
+    end
+
+    def column_width
+      @word_list.max_length + 4
     end
   end
 end

@@ -11,6 +11,18 @@ module Scarab
       @words.each(&block)
     end
 
+    def length
+      @words.length
+    end
+
+    def longest
+      @words.select {|word| word.length == max_length }
+    end
+
+    def max_length
+      @words.sort_by(&:length).reverse.first.length
+    end
+
     private
 
     def calculate_matches
