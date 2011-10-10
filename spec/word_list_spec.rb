@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Scarab::WordList do
   context "basic stuff" do
-    subject { Scarab::WordList.new("fatedh").matches }
+    subject { Scarab::WordList.new("fatedh").to_a }
 
     its(:length) { should_not be_zero }
 
@@ -19,7 +19,7 @@ describe Scarab::WordList do
   end
 
   context "wildcards" do
-    subject { Scarab::WordList.new("fr??en").matches }
+    subject { Scarab::WordList.new("fr??en").to_a }
 
     its(:length) { should_not be_zero }
 

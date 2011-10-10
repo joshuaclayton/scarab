@@ -1,10 +1,19 @@
 module Scarab
   class WordList
+    include Enumerable
+
     def initialize(letters)
       @letters = letters
+      @words   = calculate_matches
     end
 
-    def matches
+    def each(&block)
+      @words.each(&block)
+    end
+
+    private
+
+    def calculate_matches
       permutations = Parser.new(@letters).expand.inject([]) do |results, letters|
         results << letter_combinations(letters)
         results
@@ -16,7 +25,6 @@ module Scarab
       end.flatten.sort_by(&:length).reverse
     end
 
-    private
 
     def letter_combinations(letters)
       result = []
