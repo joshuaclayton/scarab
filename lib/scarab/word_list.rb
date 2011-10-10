@@ -6,7 +6,7 @@ module Scarab
 
     def matches
       permutations = Parser.new(@letters).expand.inject([]) do |results, letters|
-        results << letter_permutations(letters)
+        results << letter_combinations(letters)
         results
       end.flatten.uniq
 
@@ -18,13 +18,13 @@ module Scarab
 
     private
 
-    def letter_permutations(letters)
+    def letter_combinations(letters)
       result = []
 
       arr = letters.split(//)
 
       (1..letters.length).each do |i|
-        arr.permutation(i) {|x| result << x.sort.join }
+        arr.combination(i) {|x| result << x.sort.join }
       end
 
       result.uniq
