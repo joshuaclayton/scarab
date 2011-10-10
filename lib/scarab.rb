@@ -1,5 +1,6 @@
-require "scarab/version"
-
 module Scarab
-  # Your code goes here...
+  autoload :Words,    "scarab/words"
+  autoload :Parser,   "scarab/parser"
+  autoload :WordList, "scarab/word_list"
+  autoload :Version,  "scarab/version"
 end
