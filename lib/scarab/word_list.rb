@@ -13,7 +13,7 @@ module Scarab
       permutations.inject([]) do |results, permutation|
         results << self.class.words_hash[permutation]
         results
-      end.flatten
+      end.flatten.sort_by(&:length).reverse
     end
 
     private
