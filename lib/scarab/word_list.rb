@@ -20,7 +20,16 @@ module Scarab
     end
 
     def max_length
-      @words.sort_by(&:length).reverse.first.length
+      if longest_word = @words.sort_by(&:length).reverse.first
+        longest_word.length
+      else
+        0
+      end
+    end
+
+    def matching(regexp)
+      @words = @words.select {|word| word =~ regexp }
+      self
     end
 
     private

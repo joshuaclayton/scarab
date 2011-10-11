@@ -27,4 +27,20 @@ describe Scarab::WordList do
     it { should include("frozen") }
     it { should_not include("brazen") }
   end
+
+  context "matching" do
+    context "without matches" do
+      subject          { Scarab::WordList.new("fated").matching(/en$/) }
+      its(:length)     { should be_zero }
+      its(:max_length) { should be_zero }
+      its(:longest)    { should be_empty }
+    end
+
+    context "with matches" do
+      subject { Scarab::WordList.new("sefatedh").matching(/t.d$/) }
+      it { should include("fated") }
+      it { should include("hated") }
+      it { should_not include("steed") }
+    end
+  end
 end
