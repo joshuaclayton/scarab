@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require "scarab"
-Scarab::Cli.new(*ARGV)
+Scarab::Cli.start
